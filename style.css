@@ -47,7 +47,7 @@ hr {
     margin: 25px 0;
 }
 
-/* NOVA CAIXA DO PERSONAGEM */
+/* CAIXA DO PERSONAGEM */
 .character-box {
     padding: 15px;
     border-radius: 6px;
@@ -128,7 +128,7 @@ body.fase-garagem h1, body.fase-garagem #money-display, body.fase-garagem .highl
 }
 
 body.fase-garagem .character-box {
-    background: #1a2e1a; /* Verde bem escuro estilo matriz */
+    background: #1a2e1a;
     border: 1px solid #00ff66;
     box-shadow: inset 0 0 10px rgba(0, 255, 102, 0.1);
 }
@@ -158,7 +158,7 @@ body.fase-garagem #sell-btn {
 }
 
 /* ==========================================
-   FASE 2: VISUAL DO ESCRITÓRIO (HIGH-TECH CORPORATIVO)
+   FASE 2: VISUAL DO ESCRITÓRIO (HIGH-TECH)
    ========================================== */
 body.fase-escritorio {
     background-color: #0f172a;
@@ -203,4 +203,53 @@ body.fase-escritorio #click-btn {
 body.fase-escritorio #sell-btn {
     background: #ec4899;
     color: #ffffff;
+}
+
+/* ==========================================
+   FASE 3: SEDE CORPORATIVA (DARK GOLD LUXURY) - NOVO!
+   ========================================== */
+body.fase-corporativa {
+    background-color: #0a0a0a;
+    color: #f5f5f7;
+}
+
+body.fase-corporativa #game-container {
+    background: #141414;
+    border: 1px solid #d4af37; /* Ouro */
+    box-shadow: 0 0 25px rgba(212, 175, 55, 0.25);
+}
+
+body.fase-corporativa h1, body.fase-corporativa #money-display, body.fase-corporativa .highlight, body.fase-corporativa .character-name {
+    color: #d4af37; /* Ouro */
+    text-shadow: 0 0 5px rgba(212, 175, 55, 0.3);
+}
+
+body.fase-corporativa .character-box {
+    background: #1c1910; /* Tom escuro levemente dourado */
+    border: 1px solid #d4af37;
+    box-shadow: inset 0 0 15px rgba(212, 175, 55, 0.15);
+}
+
+body.fase-corporativa h2 {
+    color: #ffffff;
+    border-left: 4px solid #d4af37;
+}
+
+body.fase-corporativa hr {
+    background: #2a2a2a;
+}
+
+body.fase-corporativa .stats-panel, body.fase-corporativa .upgrade-item {
+    background: #1f1f1f;
+    border: 1px solid #333333;
+}
+
+body.fase-corporativa #click-btn {
+    background: #d4af37; /* Botão de Ouro */
+    color: #0a0a0a;
+}
+
+body.fase-corporativa #sell-btn {
+    background: #ffffff;
+    color: #0a0a0a;
 }
