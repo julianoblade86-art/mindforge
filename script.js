@@ -1,13 +1,17 @@
 // ==========================================
 // CENTRAL DE SPREAD DO JOGO (ESTADO ESTÁVEL)
 // ==========================================
-const gameData = {
+// ==========================================
+// CENTRAL DE SPREAD DO JOGO (ESTADO ESTÁVEL)
+// ==========================================
+let gameData = {
     tokens: 0,
     money: 0.0,
     tokensPerClick: 1,
     autoBots: 0,
     currentPhase: 1
 };
+
 
 // Banco de Dados da M.I.N.D. (Diálogos Imersivos)
 const mindDialogos = {
