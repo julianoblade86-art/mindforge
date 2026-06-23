@@ -6,7 +6,7 @@ body {
     margin: 0;
     padding: 20px;
     display: block;
-    transition: background-color 0.8s ease; /* Transição suave de cor */
+    transition: background-color 0.8s ease;
 }
 
 #game-container {
@@ -45,6 +45,28 @@ hr {
     border: 0;
     height: 1px;
     margin: 25px 0;
+}
+
+/* NOVA CAIXA DO PERSONAGEM */
+.character-box {
+    padding: 15px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-size: 1rem;
+    line-height: 1.4;
+    transition: all 0.8s ease;
+}
+
+.character-name {
+    font-weight: bold;
+    margin: 0 0 5px 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#character-message {
+    margin: 0;
+    font-style: italic;
 }
 
 .stats-panel, .upgrade-item {
@@ -101,8 +123,14 @@ body.fase-garagem #game-container {
     border: 1px solid #333;
 }
 
-body.fase-garagem h1, body.fase-garagem #money-display, body.fase-garagem .highlight {
+body.fase-garagem h1, body.fase-garagem #money-display, body.fase-garagem .highlight, body.fase-garagem .character-name {
     color: #00ff66;
+}
+
+body.fase-garagem .character-box {
+    background: #1a2e1a; /* Verde bem escuro estilo matriz */
+    border: 1px solid #00ff66;
+    box-shadow: inset 0 0 10px rgba(0, 255, 102, 0.1);
 }
 
 body.fase-garagem h2 {
@@ -133,18 +161,24 @@ body.fase-garagem #sell-btn {
    FASE 2: VISUAL DO ESCRITÓRIO (HIGH-TECH CORPORATIVO)
    ========================================== */
 body.fase-escritorio {
-    background-color: #0f172a; /* Azul marinho escuro premium */
+    background-color: #0f172a;
     color: #f1f5f9;
 }
 
 body.fase-escritorio #game-container {
     background: #1e293b;
-    border: 1px solid #38bdf8; /* Borda azul ciano brilhante */
+    border: 1px solid #38bdf8;
     box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
 }
 
-body.fase-escritorio h1, body.fase-escritorio #money-display, body.fase-escritorio .highlight {
-    color: #38bdf8; /* Azul tecnológico */
+body.fase-escritorio h1, body.fase-escritorio #money-display, body.fase-escritorio .highlight, body.fase-escritorio .character-name {
+    color: #38bdf8;
+}
+
+body.fase-escritorio .character-box {
+    background: #1e293b;
+    border: 1px solid #38bdf8;
+    box-shadow: inset 0 0 10px rgba(56, 189, 248, 0.1);
 }
 
 body.fase-escritorio h2 {
@@ -167,6 +201,6 @@ body.fase-escritorio #click-btn {
 }
 
 body.fase-escritorio #sell-btn {
-    background: #ec4899; /* Botão de vendas vira Rosa Neon corporativo */
+    background: #ec4899;
     color: #ffffff;
 }
