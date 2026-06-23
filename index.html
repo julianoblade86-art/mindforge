@@ -6,7 +6,7 @@
     <title>MindForge: AI Tycoon</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="fase-garagem"> <!-- Classe inicial para o CSS saber a fase -->
+<body class="fase-garagem">
 
     <div id="game-container">
         <header id="intro-screen">
@@ -18,6 +18,12 @@
         <hr>
 
         <main id="gameplay-screen">
+            <!-- PAINEL DO PERSONAGEM (NOVO!) -->
+            <div id="character-panel" class="character-box">
+                <p class="character-name">🤖 M.I.N.D. (Sua IA Mentora):</p>
+                <p id="character-message">"Olá, Criador. Meu código foi inicializado. Precisamos de dados para expandir nossa rede. Continue devizando!"</p>
+            </div>
+
             <div class="stats-panel">
                 <h2 id="location-title">Garagem Inicial</h2>
                 <p>Dados Coletados: <span id="data-count">0</span> Tokens</p>
@@ -31,7 +37,6 @@
 
             <hr>
 
-            <!-- SECÇÃO DE UPGRADES -->
             <div class="upgrades-panel">
                 <h2>Melhorias Disponíveis</h2>
                 
@@ -45,7 +50,6 @@
                     <button id="buy-bot-btn">Comprar (R$ 50.00)</button>
                 </div>
 
-                <!-- NOVO UPGRADE DE TRANSIÇÃO DE FASE -->
                 <div id="phase-upgrade-box" class="upgrade-item phase-upgrade">
                     <p><strong>Alugar Escritório Co-working</strong> (Muda de Fase e duplica a velocidade dos Bots!)</p>
                     <button id="buy-office-btn">Alugar (R$ 200.00)</button>
