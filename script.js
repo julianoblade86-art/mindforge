@@ -1,9 +1,9 @@
-// Estado do jogo (Fase 3: Adicionados Upgrades e Sistema Automático)
+// Estado do jogo
 let gameData = {
     tokens: 0,
     money: 0.0,
-    tokensPerClick: 1,  // Quantos tokens ganhas por clique
-    autoBots: 0         // Quantidade de bots automáticos comprados
+    tokensPerClick: 1,
+    autoBots: 0
 };
 
 // Elementos da tela
@@ -11,9 +11,22 @@ const clickBtn = document.getElementById('click-btn');
 const sellBtn = document.getElementById('sell-btn');
 const buyNotebookBtn = document.getElementById('buy-notebook-btn');
 const buyBotBtn = document.getElementById('buy-bot-btn');
-
 const dataCountDisplay = document.getElementById('data-count');
 const moneyDisplay = document.getElementById('money-display');
+
+// Função para Salvar o Progresso
+function saveGame() {
+    localStorage.setItem('mindForgeSave', JSON.stringify(gameData));
+}
+
+// Função para Carregar o Progresso
+function loadGame() {
+    const savedData = localStorage.getItem('mindForgeSave');
+    if (savedData) {
+        gameData = JSON.parse(savedData);
+        updateDisplay();
+    }
+}
 
 // Função para atualizar os valores na interface
 function updateDisplay() {
@@ -21,51 +34,57 @@ function updateDisplay() {
     moneyDisplay.textContent = `R$ ${gameData.money.toFixed(2)}`;
 }
 
-// Botão principal: Gerar Dados por Clique
+// Botão principal: Gerar Dados
 clickBtn.addEventListener('click', () => {
-    gameData.tokens += gameData.tokensPerClick; // Soma com base no multiplicador de clique
+    gameData.tokens += gameData.tokensPerClick;
     updateDisplay();
+    saveGame(); // Salva após clicar
 });
 
-// Botão de Vender Dados (10 Tokens = R$ 5)
+// Botão de Vender Dados
 sellBtn.addEventListener('click', () => {
     if (gameData.tokens >= 10) {
         gameData.tokens -= 10;
         gameData.money += 5.0;
         updateDisplay();
+        saveGame(); // Salva após vender
     } else {
         alert('Você precisa de pelo menos 10 Tokens para vender dados!');
     }
 });
 
-// COMPRAR UPGRADE: Notebook Avançado (Custa R$ 15.00)
+// Comprar Notebook (Custa R$ 15.00)
 buyNotebookBtn.addEventListener('click', () => {
     if (gameData.money >= 15.0) {
-        gameData.money -= 15.0;            // Deduz o dinheiro
-        gameData.tokensPerClick += 1;      // Cada clique agora gera +1 token
-        alert('Upgrade comprado! Seus cliques agora geram mais dados.');
+        gameData.money -= 15.0;
+        gameData.tokensPerClick += 1;
         updateDisplay();
+        saveGame(); // Salva após comprar
     } else {
-        alert('Saldo insuficiente para comprar o Notebook Avançado!');
+        alert('Saldo insuficiente!');
     }
 });
 
-// COMPRAR UPGRADE: Bot Otimizador (Custa R$ 50.00)
+// Comprar Bot (Custa R$ 50.00)
 buyBotBtn.addEventListener('click', () => {
     if (gameData.money >= 50.0) {
-        gameData.money -= 50.0;            // Deduz o dinheiro
-        gameData.autoBots += 1;            // Adiciona um bot à tua frota
-        alert('Bot comprado! Ele está gerando dados para você automaticamente.');
+        gameData.money -= 50.0;
+        gameData.autoBots += 1;
         updateDisplay();
+        saveGame(); // Salva após comprar
     } else {
-        alert('Saldo insuficiente para comprar o Bot Otimizador!');
+        alert('Saldo insuficiente!');
     }
 });
 
-// RECONHECIMENTO AUTOMÁTICO (Loop que roda a cada 1 segundo)
+// Loop automático (geração por bots)
 setInterval(() => {
     if (gameData.autoBots > 0) {
-        gameData.tokens += gameData.autoBots; // Adiciona tokens gerados pelos bots
+        gameData.tokens += gameData.autoBots;
         updateDisplay();
+        saveGame(); // Salva automaticamente a cada segundo de geração
     }
-}, 1000); // 1000 milissegundos = 1 segundo
+}, 1000);
+
+// Ao carregar a página, busca o save
+loadGame();
