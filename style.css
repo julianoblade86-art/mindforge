@@ -42,21 +42,24 @@ body {
     border-radius: 4px;
 }
 
-#data-count {
+#data-count, #money-count {
     font-size: 1.5rem;
     font-weight: bold;
     color: #00ff66;
 }
 
 .action-panel {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
 }
 
-#click-btn {
-    background-color: #00ff66;
-    color: #121212;
+button {
+    width: 100%;
+    max-width: 300px;
     border: none;
-    padding: 15px 30px;
+    padding: 15px;
     font-size: 1rem;
     font-family: inherit;
     font-weight: bold;
@@ -65,6 +68,20 @@ body {
     transition: background 0.2s;
 }
 
+#click-btn {
+    background-color: #00ff66;
+    color: #121212;
+}
+
 #click-btn:hover {
     background-color: #00cc55;
+}
+
+.secondary-btn {
+    background-color: #007bff;
+    color: white;
+}
+
+.secondary-btn:hover {
+    background-color: #0056b3;
 }
