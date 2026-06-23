@@ -1,255 +1,302 @@
 /* ==========================================
-   ESTILOS GERAIS (BASE DO JOGO)
+   FUNDAÇÃO DO SISTEMA (RESET & DESIGN BASE)
    ========================================== */
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
 body {
-    font-family: 'Courier New', Courier, monospace;
+    font-family: 'Segoe UI', 'Courier New', Courier, monospace;
     margin: 0;
-    padding: 20px;
-    display: block;
-    transition: background-color 0.8s ease;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    transition: background-color 0.8s ease, color 0.5s ease;
 }
 
 #game-container {
-    max-width: 600px;
+    max-width: 500px;
     width: 100%;
     padding: 20px;
-    border-radius: 8px;
-    margin: 0 auto;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     transition: all 0.8s ease;
 }
 
 h1 {
+    font-size: 1.6rem;
     text-align: center;
-    letter-spacing: 2px;
-    margin-bottom: 20px;
+    letter-spacing: 3px;
+    margin: 10px 0 20px 0;
+    text-transform: uppercase;
 }
 
 h2 {
-    padding-left: 10px;
-    font-size: 1.2rem;
-    margin-top: 20px;
+    font-size: 1.1rem;
+    margin: 20px 0 10px 0;
+    padding-left: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .narrative {
-    font-style: italic;
+    font-size: 0.9rem;
     line-height: 1.6;
     text-align: justify;
+    opacity: 0.85;
 }
 
 .highlight {
     text-align: center;
     font-weight: bold;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
 hr {
     border: 0;
     height: 1px;
-    margin: 25px 0;
+    margin: 20px 0;
 }
 
-/* CAIXA DO PERSONAGEM */
+/* INTERFACE DA M.I.N.D. */
 .character-box {
     padding: 15px;
-    border-radius: 6px;
+    border-radius: 8px;
     margin-bottom: 20px;
-    font-size: 1rem;
-    line-height: 1.4;
-    transition: all 0.8s ease;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    transition: all 0.6s ease;
 }
 
 .character-name {
     font-weight: bold;
-    margin: 0 0 5px 0;
+    margin: 0 0 8px 0;
     text-transform: uppercase;
     letter-spacing: 1px;
+    font-size: 0.85rem;
 }
 
 #character-message {
     margin: 0;
-    font-style: italic;
+    font-family: 'Courier New', Courier, monospace;
 }
 
+/* PAINÉIS E CARDS */
 .stats-panel, .upgrade-item {
     padding: 15px;
-    border-radius: 6px;
-    margin-bottom: 15px;
-    transition: all 0.8s ease;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    transition: all 0.5s ease;
 }
 
 .stats-panel p {
     font-size: 1.1rem;
-    margin: 10px 0;
+    margin: 8px 0;
+    font-weight: 600;
 }
 
+/* BOTÕES DE AÇÃO INTERATIVOS */
 button {
     width: 100%;
-    padding: 15px;
-    margin-bottom: 15px;
+    padding: 14px;
+    margin-bottom: 12px;
     border: none;
-    border-radius: 6px;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 1rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
     font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
     cursor: pointer;
-    transition: background 0.2s, transform 0.1s;
+    transition: all 0.2s ease;
 }
 
 button:active {
-    transform: scale(0.98);
+    transform: scale(0.97);
+}
+
+.upgrade-item {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.upgrade-item p {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.4;
 }
 
 .upgrade-item button {
-    background: #ffcc00;
-    color: #121212;
     padding: 10px;
+    font-size: 0.85rem;
     margin-bottom: 0;
-    font-size: 0.95rem;
-}
-
-.upgrade-item button:hover {
-    background: #e6b800;
 }
 
 /* ==========================================
-   FASE 1: VISUAL DA GARAGEM (CYBERPUNK ESCURO)
+   FASE 1: GARAGEM (VERDE TERMINAL)
    ========================================== */
 body.fase-garagem {
-    background-color: #121212;
-    color: #e0e0e0;
+    background-color: #0d0f12;
+    color: #e2e8f0;
 }
 
 body.fase-garagem #game-container {
-    background: #1e1e1e;
-    border: 1px solid #333;
+    background: #14181c;
+    border: 1px solid #1f2937;
 }
 
-body.fase-garagem h1, body.fase-garagem #money-display, body.fase-garagem .highlight, body.fase-garagem .character-name {
-    color: #00ff66;
+body.fase-garagem h1, body.fase-garagem #money-display, 
+body.fase-garagem .highlight, body.fase-garagem .character-name {
+    color: #10b981; /* Verde Matrix */
+    text-shadow: 0 0 8px rgba(16, 185, 129, 0.2);
 }
 
 body.fase-garagem .character-box {
-    background: #1a2e1a;
-    border: 1px solid #00ff66;
-    box-shadow: inset 0 0 10px rgba(0, 255, 102, 0.1);
+    background: rgba(16, 185, 129, 0.05);
+    border: 1px solid #10b981;
+    box-shadow: inset 0 0 12px rgba(16, 185, 129, 0.1);
 }
 
 body.fase-garagem h2 {
-    color: #ffffff;
-    border-left: 4px solid #00ff66;
+    border-left: 3px solid #10b981;
 }
 
 body.fase-garagem hr {
-    background: #333;
+    background: #1f2937;
 }
 
 body.fase-garagem .stats-panel, body.fase-garagem .upgrade-item {
-    background: #252525;
-    border: 1px solid #444;
+    background: #1c232b;
+    border: 1px solid #2d3748;
 }
 
 body.fase-garagem #click-btn {
-    background: #00ff66;
-    color: #121212;
+    background: #10b981;
+    color: #0d0f12;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
 }
 
 body.fase-garagem #sell-btn {
-    background: #0077ff;
+    background: #3b82f6;
     color: #ffffff;
 }
 
+body.fase-garagem .upgrade-item button {
+    background: #f59e0b;
+    color: #0d0f12;
+}
+
 /* ==========================================
-   FASE 2: VISUAL DO ESCRITÓRIO (HIGH-TECH)
+   FASE 2: CO-WORKING (CIBER CIANO)
    ========================================== */
 body.fase-escritorio {
-    background-color: #0f172a;
+    background-color: #0b1329;
     color: #f1f5f9;
 }
 
 body.fase-escritorio #game-container {
-    background: #1e293b;
-    border: 1px solid #38bdf8;
-    box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+    background: #1c2541;
+    border: 1px solid #00b4d8;
+    box-shadow: 0 0 20px rgba(0, 180, 216, 0.25);
 }
 
-body.fase-escritorio h1, body.fase-escritorio #money-display, body.fase-escritorio .highlight, body.fase-escritorio .character-name {
-    color: #38bdf8;
+body.fase-escritorio h1, body.fase-escritorio #money-display, 
+body.fase-escritorio .highlight, body.fase-escritorio .character-name {
+    color: #00b4d8; /* Ciano Neon */
+    text-shadow: 0 0 8px rgba(0, 180, 216, 0.3);
 }
 
 body.fase-escritorio .character-box {
-    background: #1e293b;
-    border: 1px solid #38bdf8;
-    box-shadow: inset 0 0 10px rgba(56, 189, 248, 0.1);
+    background: rgba(0, 180, 216, 0.05);
+    border: 1px solid #00b4d8;
+    box-shadow: inset 0 0 12px rgba(0, 180, 216, 0.15);
 }
 
 body.fase-escritorio h2 {
-    color: #ffffff;
-    border-left: 4px solid #38bdf8;
+    border-left: 3px solid #00b4d8;
 }
 
 body.fase-escritorio hr {
-    background: #334155;
+    background: #3a506b;
 }
 
 body.fase-escritorio .stats-panel, body.fase-escritorio .upgrade-item {
-    background: #334155;
-    border: 1px solid #475569;
+    background: #222e50;
+    border: 1px solid #3a506b;
 }
 
 body.fase-escritorio #click-btn {
-    background: #38bdf8;
-    color: #0f172a;
+    background: #00b4d8;
+    color: #0b1329;
+    box-shadow: 0 4px 12px rgba(0, 180, 216, 0.3);
 }
 
 body.fase-escritorio #sell-btn {
-    background: #ec4899;
+    background: #d946ef;
     color: #ffffff;
+}
+
+body.fase-escritorio .upgrade-item button {
+    background: #00b4d8;
+    color: #0b1329;
 }
 
 /* ==========================================
-   FASE 3: SEDE CORPORATIVA (DARK GOLD LUXURY) - NOVO!
+   FASE 3: CORPORAÇÃO (OURO QUANTICO)
    ========================================== */
 body.fase-corporativa {
-    background-color: #0a0a0a;
-    color: #f5f5f7;
+    background-color: #050505;
+    color: #f4f4f5;
 }
 
 body.fase-corporativa #game-container {
-    background: #141414;
-    border: 1px solid #d4af37; /* Ouro */
-    box-shadow: 0 0 25px rgba(212, 175, 55, 0.25);
+    background: #111111;
+    border: 1px solid #fbbf24; /* Ouro */
+    box-shadow: 0 0 30px rgba(251, 191, 36, 0.3);
 }
 
-body.fase-corporativa h1, body.fase-corporativa #money-display, body.fase-corporativa .highlight, body.fase-corporativa .character-name {
-    color: #d4af37; /* Ouro */
-    text-shadow: 0 0 5px rgba(212, 175, 55, 0.3);
+body.fase-corporativa h1, body.fase-corporativa #money-display, 
+body.fase-corporativa .highlight, body.fase-corporativa .character-name {
+    color: #fbbf24;
+    text-shadow: 0 0 10px rgba(251, 191, 36, 0.4);
 }
 
 body.fase-corporativa .character-box {
-    background: #1c1910; /* Tom escuro levemente dourado */
-    border: 1px solid #d4af37;
-    box-shadow: inset 0 0 15px rgba(212, 175, 55, 0.15);
+    background: rgba(251, 191, 36, 0.03);
+    border: 1px solid #fbbf24;
+    box-shadow: inset 0 0 15px rgba(251, 191, 36, 0.2);
 }
 
 body.fase-corporativa h2 {
-    color: #ffffff;
-    border-left: 4px solid #d4af37;
+    border-left: 3px solid #fbbf24;
 }
 
 body.fase-corporativa hr {
-    background: #2a2a2a;
+    background: #27272a;
 }
 
 body.fase-corporativa .stats-panel, body.fase-corporativa .upgrade-item {
-    background: #1f1f1f;
-    border: 1px solid #333333;
+    background: #18181b;
+    border: 1px solid #27272a;
 }
 
 body.fase-corporativa #click-btn {
-    background: #d4af37; /* Botão de Ouro */
-    color: #0a0a0a;
+    background: #fbbf24;
+    color: #050505;
+    box-shadow: 0 4px 15px rgba(251, 191, 36, 0.4);
 }
 
 body.fase-corporativa #sell-btn {
-    background: #ffffff;
-    color: #0a0a0a;
+    background: #f4f4f5;
+    color: #050505;
+}
+
+body.fase-corporativa .upgrade-item button {
+    background: #fbbf24;
+    color: #050505;
 }
