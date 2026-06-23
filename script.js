@@ -9,13 +9,16 @@ let gameData = {
     currentPhase: 1 // Começa na Fase 1 (Garagem)
 };
 
-// Sistema da M.I.N.D. (Diálogos Dinâmicos)
+// Sistema da M.I.N.D. (Diálogos Dinâmicos Fixos)
 const mindDialogos = {
     inicial: "M.I.N.D. conectada. Olá, Criador. O sistema da garagem está operacional, mas obsoleto. Recomendo começar a devizar imediatamente.",
     poucoCodigo: "Detetei atividade no terminal. Estamos progredindo, mas o ritmo atual de dados ainda é insignificante para as grandes corporações.",
     medioCodigo: "Análise quantitativa: A estrutura de dados está a expandir-se. Seus algoritmos chamam a atenção na rede subterrânea.",
     muitoCodigo: "Alerta de expansão! A quantidade de dados produzidos ultrapassou a barreira local. Estamos prontos para a transição corporativa."
 };
+
+// Variavel de controle para não sobrepor diálogos de eventos com os normais
+let emEvento = false;
 
 // Elementos da Interface (DOM)
 const clickBtn = document.getElementById('click-btn');
@@ -47,9 +50,9 @@ function applyPhaseEffects() {
     }
 }
 
-// Função para atualizar as falas da M.I.N.D.
+// Função para atualizar as falas padrão da M.I.N.D.
 function atualizarMensagemMind() {
-    if (!characterMessage) return;
+    if (!characterMessage || emEvento) return; // Se estiver rolando um evento, não muda o texto
     
     if (gameData.tokens === 0 && gameData.money === 0) {
         characterMessage.textContent = mindDialogos.inicial;
@@ -72,7 +75,7 @@ function updateDisplay() {
 // Função para Salvar o Progresso
 function saveGame() {
     try {
-        localStorage.setItem('mindForgeSaveDataV3', JSON.stringify(gameData));
+        localStorage.setItem('mindForgeSaveDataV4', JSON.stringify(gameData));
     } catch (e) {
         console.log("Erro ao salvar progresso:", e);
     }
@@ -81,7 +84,7 @@ function saveGame() {
 // Função para Carregar o Progresso
 function loadGame() {
     try {
-        const savedData = localStorage.getItem('mindForgeSaveDataV3');
+        const savedData = localStorage.getItem('mindForgeSaveDataV4');
         if (savedData) {
             const parsed = JSON.parse(savedData);
             if (parsed.tokens !== undefined) gameData.tokens = parsed.tokens;
@@ -97,7 +100,48 @@ function loadGame() {
     updateDisplay();
 }
 
-// Botão principal: Gerar Dados
+// ==========================================
+// SISTEMA DE EVENTOS ALEATÓRIOS (NOVO!)
+// ==========================================
+function rodarEventoAleatorio() {
+    if (!characterMessage) return;
+
+    // Sorteia um número de 1 a 3
+    let chance = Math.floor(Math.random() * 3) + 1;
+
+    if (chance === 1) {
+        // EVENTO RUIM: Ataque Hacker (Só acontece se tiver tokens)
+        if (gameData.tokens >= 15) {
+            emEvento = true;
+            gameData.tokens -= 15;
+            characterMessage.textContent = "⚠️ ALERTA: Um grupo de script-kiddies invadiu nossa rede! Eles roubaram 15 Tokens de dados antes que eu pudesse bloqueá-los.";
+            updateDisplay();
+            saveGame();
+            
+            // Depois de 7 segundos, o aviso some e a M.I.N.D. volta ao normal
+            setTimeout(() => { emEvento = false; atualizarMensagemMind(); }, 7000);
+        }
+    } else if (chance === 2) {
+        // EVENTO BOM: Contrato Freelance
+        emEvento = true;
+        let bonus = 25.0;
+        gameData.money += bonus;
+        characterMessage.textContent = "💎 BÔNUS: Um fórum underground comprou nossa API de criptografia. Recebemos um bônus anônimo de R$ 25.00!";
+        updateDisplay();
+        saveGame();
+
+        setTimeout(() => { emEvento = false; atualizarMensagemMind(); }, 7000);
+    }
+    // Se sair o número 3, nada acontece (sistema está estável)
+}
+
+// Executa a tentativa de evento a cada 30 segundos (30000 milissegundos)
+setInterval(rodarEventoAleatorio, 30000);
+
+
+// ==========================================
+// GATILHOS DOS BOTÕES
+// ==========================================
 if (clickBtn) {
     clickBtn.addEventListener('click', () => {
         gameData.tokens += gameData.tokensPerClick;
@@ -106,7 +150,6 @@ if (clickBtn) {
     });
 }
 
-// Botão de Vender Dados
 if (sellBtn) {
     sellBtn.addEventListener('click', () => {
         if (gameData.tokens >= 10) {
@@ -120,7 +163,6 @@ if (sellBtn) {
     });
 }
 
-// Comprar Notebook
 if (buyNotebookBtn) {
     buyNotebookBtn.addEventListener('click', () => {
         if (gameData.money >= 15.0) {
@@ -135,7 +177,6 @@ if (buyNotebookBtn) {
     });
 }
 
-// Comprar Bot
 if (buyBotBtn) {
     buyBotBtn.addEventListener('click', () => {
         if (gameData.money >= 50.0) {
@@ -150,7 +191,6 @@ if (buyBotBtn) {
     });
 }
 
-// Alugar Escritório Co-working (Fase 2)
 if (buyOfficeBtn) {
     buyOfficeBtn.addEventListener('click', () => {
         if (gameData.money >= 200.0) {
@@ -166,7 +206,7 @@ if (buyOfficeBtn) {
     });
 }
 
-// Loop automático (geração por bots)
+// Loop automático dos bots
 setInterval(() => {
     if (gameData.autoBots > 0) {
         let production = gameData.currentPhase === 2 ? gameData.autoBots * 2 : gameData.autoBots;
