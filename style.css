@@ -1,32 +1,30 @@
+/* ==========================================
+   ESTILOS GERAIS (BASE DO JOGO)
+   ========================================== */
 body {
-    background-color: #121212;
-    color: #e0e0e0;
     font-family: 'Courier New', Courier, monospace;
     margin: 0;
     padding: 20px;
     display: block;
+    transition: background-color 0.8s ease; /* Transição suave de cor */
 }
 
 #game-container {
     max-width: 600px;
     width: 100%;
-    background: #1e1e1e;
     padding: 20px;
     border-radius: 8px;
-    border: 1px solid #333;
     margin: 0 auto;
+    transition: all 0.8s ease;
 }
 
 h1 {
-    color: #00ff66;
     text-align: center;
     letter-spacing: 2px;
     margin-bottom: 20px;
 }
 
 h2 {
-    color: #ffffff;
-    border-left: 4px solid #00ff66;
     padding-left: 10px;
     font-size: 1.2rem;
     margin-top: 20px;
@@ -34,13 +32,11 @@ h2 {
 
 .narrative {
     font-style: italic;
-    color: #a0a0a0;
     line-height: 1.6;
     text-align: justify;
 }
 
 .highlight {
-    color: #00ff66;
     text-align: center;
     font-weight: bold;
 }
@@ -48,29 +44,19 @@ h2 {
 hr {
     border: 0;
     height: 1px;
-    background: #333;
     margin: 25px 0;
 }
 
-.stats-panel {
-    background: #252525;
+.stats-panel, .upgrade-item {
     padding: 15px;
     border-radius: 6px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
+    transition: all 0.8s ease;
 }
 
 .stats-panel p {
     font-size: 1.1rem;
     margin: 10px 0;
-}
-
-#money-display {
-    color: #00ff66;
-    font-weight: bold;
-}
-
-.action-panel {
-    display: block;
 }
 
 button {
@@ -90,43 +76,6 @@ button:active {
     transform: scale(0.98);
 }
 
-#click-btn {
-    background: #00ff66;
-    color: #121212;
-}
-
-#click-btn:hover {
-    background: #00cc55;
-}
-
-#sell-btn {
-    background: #0077ff;
-    color: #ffffff;
-}
-
-#sell-btn:hover {
-    background: #0055cc;
-}
-
-/* ESTILOS DOS UPGRADES */
-.upgrades-panel {
-    margin-top: 10px;
-}
-
-.upgrade-item {
-    background: #252525;
-    padding: 15px;
-    border-radius: 6px;
-    margin-bottom: 15px;
-    border: 1px solid #444;
-}
-
-.upgrade-item p {
-    margin: 0 0 12px 0;
-    font-size: 0.95rem;
-    line-height: 1.4;
-}
-
 .upgrade-item button {
     background: #ffcc00;
     color: #121212;
@@ -137,4 +86,87 @@ button:active {
 
 .upgrade-item button:hover {
     background: #e6b800;
+}
+
+/* ==========================================
+   FASE 1: VISUAL DA GARAGEM (CYBERPUNK ESCURO)
+   ========================================== */
+body.fase-garagem {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+body.fase-garagem #game-container {
+    background: #1e1e1e;
+    border: 1px solid #333;
+}
+
+body.fase-garagem h1, body.fase-garagem #money-display, body.fase-garagem .highlight {
+    color: #00ff66;
+}
+
+body.fase-garagem h2 {
+    color: #ffffff;
+    border-left: 4px solid #00ff66;
+}
+
+body.fase-garagem hr {
+    background: #333;
+}
+
+body.fase-garagem .stats-panel, body.fase-garagem .upgrade-item {
+    background: #252525;
+    border: 1px solid #444;
+}
+
+body.fase-garagem #click-btn {
+    background: #00ff66;
+    color: #121212;
+}
+
+body.fase-garagem #sell-btn {
+    background: #0077ff;
+    color: #ffffff;
+}
+
+/* ==========================================
+   FASE 2: VISUAL DO ESCRITÓRIO (HIGH-TECH CORPORATIVO)
+   ========================================== */
+body.fase-escritorio {
+    background-color: #0f172a; /* Azul marinho escuro premium */
+    color: #f1f5f9;
+}
+
+body.fase-escritorio #game-container {
+    background: #1e293b;
+    border: 1px solid #38bdf8; /* Borda azul ciano brilhante */
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+}
+
+body.fase-escritorio h1, body.fase-escritorio #money-display, body.fase-escritorio .highlight {
+    color: #38bdf8; /* Azul tecnológico */
+}
+
+body.fase-escritorio h2 {
+    color: #ffffff;
+    border-left: 4px solid #38bdf8;
+}
+
+body.fase-escritorio hr {
+    background: #334155;
+}
+
+body.fase-escritorio .stats-panel, body.fase-escritorio .upgrade-item {
+    background: #334155;
+    border: 1px solid #475569;
+}
+
+body.fase-escritorio #click-btn {
+    background: #38bdf8;
+    color: #0f172a;
+}
+
+body.fase-escritorio #sell-btn {
+    background: #ec4899; /* Botão de vendas vira Rosa Neon corporativo */
+    color: #ffffff;
 }
